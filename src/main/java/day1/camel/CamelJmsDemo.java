@@ -18,7 +18,7 @@ public class CamelJmsDemo {
 
     public static void main(String [] args){
         try {
-            CamelContext context = new DefaultCamelContext();
+            final CamelContext context = new DefaultCamelContext();
             context.setTracing(true);
 
             context.addRoutes(new RouteBuilder() {
@@ -52,17 +52,16 @@ public class CamelJmsDemo {
                 }
             });
 
-
+            Runnable producer = new Runnable() {
+                @Override
+                public void run() {
+                    ProducerTemplate producerT = context.createProducerTemplate();
+                    producerT.sendBody("direct:foo", "This is hello world message !");
+                }
+            };
+            Thread t = new Thread(producer);
+            t.start();
             context.start();
-            System.out.println("111----------------------------------------");
-
-            Thread.sleep(5000);
-            System.out.println("22------------------------------------------2");
-            ProducerTemplate producer = context.createProducerTemplate();
-            producer.sendBody("direct:foo", "This is hello world message !");
-            System.out.println("333-----------------------------3");
-           // Thread.sleep(10000);
-
             context.stop();
 
 
