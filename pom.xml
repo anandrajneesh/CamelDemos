@@ -41,6 +41,12 @@
             <version>${camel-version}</version>
             <!-- use the same version as your Camel core version -->
         </dependency>
+        <dependency>
+            <groupId>org.apache.activemq</groupId>
+            <artifactId>activemq-camel</artifactId>
+            <version>5.6.0</version>
+        </dependency>
+
         <!-- testing -->
         <dependency>
             <groupId>org.apache.camel</groupId>
