@@ -37,6 +37,8 @@ public class Demo {
 
             Thread.sleep(10000);
 
+            context.stop();
+
         }catch (Exception e){
             e.printStackTrace();
         }
